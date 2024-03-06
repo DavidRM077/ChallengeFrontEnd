@@ -1,0 +1,67 @@
+:root
+{
+    --body_color:hsl(212, 45%, 89%);
+    --CardColor: hsl(0, 0%, 100%);
+    --SecondText: hsl(220, 15%, 55%);
+    --FirstText: hsl(218, 44%, 22%);
+}
+
+
+body
+{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    background-color: var(--body_color);
+}
+
+.Container
+{
+ 
+    display: flex;
+    height: 600px;
+    align-items: center;
+    justify-content: center;
+    
+}
+
+.CardCodeQR
+{
+background-color: var(--CardColor);
+width: 300px;
+border-radius: 10px;
+padding: 10px 0px;
+
+}
+
+.CardCodeQR-ContentImages
+{
+    display: flex;
+    justify-content: center;
+}
+
+.CardCodeQR-Images
+{
+width: 259px;
+border-radius: 10px;
+}
+
+.CardCodeQR-Title
+{
+   
+    font-family: "Outfit", sans-serif;
+    font-size: 20px;
+    font-weight: 700;
+    text-align: center;
+    
+    color:var(--FirstText);
+}
+
+.CardCodeQR-Paragraph
+{
+    font-family: "Outfit", sans-serif;
+    font-size: 15px;
+    color: var(--SecondText);
+    font-weight: 700;
+    text-align:  center;
+}
