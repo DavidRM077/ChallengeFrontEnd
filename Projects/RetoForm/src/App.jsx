@@ -9,7 +9,7 @@ function App() {
 
   return (
     <>
-      
+      <img src="/images/favicon-32x32.png" alt="" />
     </>
   )
 }
