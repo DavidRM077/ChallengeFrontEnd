@@ -48,7 +48,6 @@ body
   font-family: "Poppins", sans-serif;
   font-weight: 700;
   font-style: normal;
-  
 }
 
 .txtSecond
@@ -56,6 +55,7 @@ body
   color: var(--White);
   font-family: "Poppins", sans-serif;
   font-style: normal;
+  
 }
 
 
@@ -136,4 +136,12 @@ body
 .Terms
 {
   color: red;
+}
+
+
+
+@media (max-width:800px) {
+  .txtFirst {
+    text-align: center;
+  }
 }
