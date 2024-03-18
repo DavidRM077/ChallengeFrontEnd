@@ -19,6 +19,9 @@ document.addEventListener("DOMContentLoaded", function() {
   var lastname = document.getElementById('lastname');
   var emailInput = document.getElementById('emailimput');
   var passwordd = document.getElementById('passwordi');
+  var emaimValidation = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+  var email = emailInput.value.trim();
+
   formulario.addEventListener("submit", function(event) {
     // Validar el campo de nombre de usuario
     if (imput1.value.trim() === "") {
@@ -32,7 +35,7 @@ if (lastname.value.trim() === "")
   event.preventDefault();
 }
 
-if (emailInput.value.trim() === "")
+if (email === "" || !emaimValidation.test(email))
 {
   alert("Por favor, ingresa tu correo de usuario.");
   event.preventDefault();
