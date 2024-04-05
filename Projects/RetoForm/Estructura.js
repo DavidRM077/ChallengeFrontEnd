@@ -1,12 +1,12 @@
 
   const form = document.getElementById("FormActive");
- 
+  const firstName = document.getElementById('imputOne')
   
 form.addEventListener("submit", (e) => {
  
   e.preventDefault();
   
-  const firstName = form["imputOne"].value;
+   firstName = form["imputOne"].value;
   const secondName = form["lastname"].value;
   const email = form["emailimput"].value;
   const password = form["passwordi"].value;
