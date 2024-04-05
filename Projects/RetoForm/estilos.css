@@ -85,22 +85,28 @@ body
   align-items: center;
 }
 
-.FormActive small
-{
-opacity:  1;
-}
 
 .Field {
   margin-bottom: 30px;
+  width: 85%;
 }
 
 .inputStyle
 {
   
-  width: 85%;
+  width: 100%;
   padding: 20px;
   height: 20px;
-  border: var(--Grayish_Blue) solid 1px  ;
+  border: var(--Grayish_Blue) solid 1px ;
+}
+
+.errorIcon 
+{
+  outline:  1px solid var(--Red);
+  background-image: url(images/icon-error.svg);
+  background-repeat: no-repeat;
+  background-position: calc(100% - 10px) center;
+  
 }
 
 .inputStyle:focus
@@ -123,22 +129,15 @@ opacity:  1;
 }
 
 .errorMsg{
-  /* font-size: 12px; */ /* Este estilo quizá debería ir en el small */ 
+  
   color: var(--Red);
   font-weight: bold;
-  /* text-align: right; */ /* Este estilo quizá debería ir en el small */ 
+  text-align: right;
+
 }
 
-/* .errorMsg.active 
-{
-  display: block;
-}
 
-.errorMsg::before
-{
-  content: "⚠ ";
-}
- */
+
 
 
 
@@ -185,15 +184,6 @@ opacity:  1;
   color: red;
 }
 
-.error-icons
-{
-  display: none;
-}
-
-.error-active
-{
-  display: block;
-}
 
 
 
