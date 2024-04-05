@@ -49,31 +49,33 @@
           </div>
           <div class="FormCard">
             <form action="" id="FormActive" method="post" class="FormActive">
-              <div class="imputOne">
+              <div class="Field imputOne">
                 <input
                   type="text"
                   name="firstname"
                   class="inputStyle"
                   placeholder="Name"
                   id="imputOne"
-                  required
                 />
-                <small> </small>
+                <div>
+                  <small></small>
+                </div>
               </div>
 
-              <div class="lastname">
+              <div class="Field lastname">
                 <input
                   type="text"
                   name="secondname"
                   class="inputStyle"
                   placeholder="Last Name"
                   id="lastname"
-                  required
                 />
-                <small></small>
+                <div>
+                  <small></small>
+                </div>
               </div>
 
-              <div class="emailimput">
+              <div class="Field emailimput">
                 <input
                   pattern="[a-zA-Z0-9._%\+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}"
                   type="email"
@@ -81,23 +83,25 @@
                   class="inputStyle"
                   placeholder="Email Address"
                   id="emailimput"
-                  required
                   autocomplete="username"
                 />
-                <small></small>
+                <div>
+                  <small></small>
+                </div>
               </div>
 
-              <div class="passwordi">
+              <div class="Field passwordi">
                 <input
                   type="password"
                   name="password"
                   class="inputStyle"
                   placeholder="Password"
                   id="passwordi"
-                  required
                   autocomplete="current-password"
                 />
-                <small></small>
+                <div>
+                  <small></small>
+                </div>
               </div>
 
               <button type="submit" class="ClainBtn" id="ClainBtn">
