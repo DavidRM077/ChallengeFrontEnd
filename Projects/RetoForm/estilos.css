@@ -85,12 +85,17 @@ body
   align-items: center;
 }
 
+.FormActive small
+{
+opacity:  1;
+}
+
 .inputStyle
 {
   
   width: 85%;
   padding: 20px;
-  
+  margin-bottom: 30px;
   height: 20px;
   border: var(--Grayish_Blue) solid 1px  ;
 }
@@ -114,15 +119,43 @@ body
   margin-top: 25px;
 }
 
-#errorMsg
-{
+.errorMsg{
+
+
   margin-left: 60%;
   font-size: 12px;
   color: var(--Red);
   font-weight: bold;
   text-align: right;
-  
+ 
 }
+
+/* .errorMsg.active 
+{
+  display: block;
+}
+
+.errorMsg::before
+{
+  content: "⚠ ";
+}
+ */
+small
+{
+  display: block;
+}
+
+
+/* #errorMsg1{
+  margin-left: 60%;
+  font-size: 12px;
+  color: var(--Red);
+  font-weight: bold;
+  text-align: right;
+  display: none;
+} */
+
+
 
 .name
 {
