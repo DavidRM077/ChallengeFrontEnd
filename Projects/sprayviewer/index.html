@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>Spray Tools</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta property="og:title" content="Spray Tools by Weaita" />
+	<meta property="og:description" content="Herramienta online para la visualización de sprays y otras cositas" />
+	<meta property="og:image" content="https://i.imgur.com/81PWRaH.png" />
+	<style>
+		body {
+			background-color: #f5f7fa;
+			font-family: 'Roboto', sans-serif;
+			margin: 0;
+		}
+
+		header {
+			background-image: linear-gradient(to bottom right, #536dfe, #00b0ff);
+			color: #fff;
+			display: flex;
+			align-items: center;
+			justify-content: space-between;
+			height: 8vh;
+			padding: 0 20px;
+		}
+
+		header img {
+			width: 60px;
+			height: 60px;
+		}
+
+		/* Selector de vehiculos */
+		.select-container {
+			display: flex;
+			align-items: center;
+			font-size: 16px;
+			padding: 8px;
+		}
+
+		select {
+			background-color: #fff;
+			border: none;
+			border-radius: 4px;
+			color: #333;
+			padding: 8px;
+			margin-left: 5px;
+		}
+
+		/* Subir spray */
+		.spray-upload {
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			position: absolute;
+			top: 9.5vh;
+			right: 15px;
+			z-index: 1;
+		}
+
+		.spray-upload label {
+			background-image: linear-gradient(to bottom right, #536dfe, #00b0ff);
+			color: #fff;
+			padding: 10px 20px;
+			border-radius: 25px;
+			cursor: pointer;
+			margin-bottom: 10px;
+			transition: background-image 0.3s ease-in-out;
+		}
+
+		.spray-upload label:hover {
+			background-image: linear-gradient(to bottom right, #00b0ff, #536dfe);
+		}
+
+		/* Subir a imgur*/
+		.imgur-upload {
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			position: absolute;
+			top: 15.5vh;
+			right: 15px;
+			z-index: 1;
+		}
+
+		.imgur-upload label {
+			background-image: linear-gradient(to bottom right, #00d1b5, #009160);
+			color: #fff;
+			padding: 10px 20px;
+			border-radius: 25px;
+			cursor: pointer;
+			margin-bottom: 10px;
+			transition: background-image 0.3s ease-in-out;
+		}
+
+		.imgur-upload label:hover {
+			background-image: linear-gradient(to bottom right, #009160, #00d1b5);
+		}
+
+
+		/* Bajar plantilla*/
+		.template-download {
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			position: absolute;
+			top: 21.5vh;
+			right: 15px;
+			z-index: 1;
+		}
+
+		.template-download label {
+			background-image: linear-gradient(to bottom right, #ff4800, #ff7c02);
+			color: #fff;
+			padding: 10px 20px;
+			border-radius: 25px;
+			cursor: pointer;
+			margin-bottom: 10px;
+			transition: background-image 0.3s ease-in-out;
+		}
+
+		.template-download label:hover {
+			background-image: linear-gradient(to bottom right, #ff7c02, #ff4800);
+		}
+
+
+		/* Darkmode */
+		.image-container {
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			position: absolute;
+			top: 9.5vh;
+			left: 15px;
+			z-index: 1;
+		}
+
+		.image-container img {
+			width: 60px;
+			height: 60px;
+			cursor: pointer;
+		}
+
+		/* Loading gif */
+		.gif-container {
+			display: none;
+			flex-direction: column;
+			align-items: center;
+			position: absolute;
+			top: 16vh;
+			right: 160px;
+			z-index: 1;
+		}
+
+		.gif-container img {
+			width: 30px;
+			height: 30px;
+			filter: invert(0%);
+		}
+
+		input[type="file"] {
+			display: none;
+		}
+
+		model-viewer {
+			width: 100%;
+			height: 92vh;
+			background-color: #f5f7fa;
+		}
+	</style>
+</head>
+
+<body>
+	<header>
+		<a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ" target="_blank">
+			<img src="https://apng.onevcat.com/assets/elephant.gif" alt="Radio Image">
+		</a>
+		<div class="select-container">
+			<label for="model-select"></label>
+			<select id="model-select" onchange="changeModel()">
+				<!-- <option value="assets/windsor.glb" data-template="https://i.imgur.com/FZlRSVD.jpg">Windsor
+				</option>
+				<option value="assets/regina.glb">Regina
+				</option>
+				<option value="assets/policecar.glb" data-template="https://i.imgur.com/p2njz30.jpg">Police
+					LV
+				</option>
+				<option value="assets/chiron.glb" data-template="https://i.imgur.com/1ztmFdX.jpg">Previon
+				</option>
+				<option value="assets/panton.glb" data-template="https://i.imgur.com/GljK3dr.jpg">Panto
+				</option>
+				<option value="assets/fmustang.glb" data-template="https://i.imgur.com/RqaMNSp.png">Ford Mustang 1971
+				</option>
+				<option value="assets/gtr.glb" data-template="https://i.imgur.com/Xi1RXAy.png">Nissan GT-R R35
+				</option>
+				<option value="assets/mclaren.glb" data-template="https://i.imgur.com/s3fMYDB.png">McLaren P1
+				</option>
+				<option value="assets/tesla.glb" data-template="https://i.imgur.com/JlpO5Tt.jpg">Tesla Model S
+				</option> -->
+			</option>
+			<option value="assets/elegy.glb" data-template="https://i.imgur.com/KjdGqd6.png">Elegy </option>
+			<option value="assets/turismo.glb" data-template="https://i.imgur.com/j3cx4d1.png">Turismo </option>
+			<option value="assets/supergt.glb" data-template="https://i.imgur.com/j3cx4d1.png">Super Gt </option>
+			<option value="assets/dukes.glb" data-template="https://i.imgur.com/j3cx4d1.png">Dukes </option>
+			<option value="assets/Cheatah.glb" data-template="https://i.imgur.com/j3cx4d1.png">Cheath </option>
+			<option value="assets/Sultan.glb" data-template="https://i.imgur.com/j3cx4d1.png">Sultan </option>
+			<option value="assets/Lancer.glb" data-template="https://i.imgur.com/j3cx4d1.png">Lancer </option>
+			<option value="assets/cruiser.glb" data-template="https://i.imgur.com/j3cx4d1.png">Cruiser </option>
+			<option value="assets/bullet.glb" data-template="https://i.imgur.com/j3cx4d1.png">Bullet </option>
+			<option value="assets/huracan.glb" data-template="https://i.imgur.com/j3cx4d1.png">Grotti Huracan </option>
+			<option value="assets/180.glb" data-template="https://i.imgur.com/j3cx4d1.png">Annis 180sx </option>
+			</select>
+		</div>
+	</header>
+
+
+	<div class="spray-upload">
+		<label for="urlA">Cargar spray</label>
+		<input type="file" id="urlA">
+	</div>
+
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/blueimp-load-image/5.14.0/load-image.all.min.js"></script>
+
+	<div id="gif-container" class="gif-container">
+		<img src="https://i.imgur.com/Nm1O43o.gif" alt="GIF">
+	</div>
+	<div class="imgur-upload">
+		<label for="urlB">Subir a Imgur</label>
+		<input type="file" id="urlB">
+	</div>
+	<script>
+		document.getElementById("urlB").addEventListener("change", function () {
+			var loadingGif = document.getElementById("gif-container");
+			loadingGif.style.display = "block";
+
+			var file = this.files[0];
+			var reader = new FileReader();
+			reader.onload = function (event) {
+				var img = new Image();
+				img.onload = function () {
+					var canvas = document.createElement('canvas');
+					var ctx = canvas.getContext('2d');
+
+					var max_size = 1000;
+					var width = img.width;
+					var height = img.height;
+
+					if (width > height) {
+						if (width > max_size) {
+							height *= max_size / width;
+							width = max_size;
+						}
+					} else {
+						if (height > max_size) {
+							width *= max_size / height;
+							height = max_size;
+						}
+					}
+
+					canvas.width = width;
+					canvas.height = height;
+
+					ctx.drawImage(img, 0, 0, width, height);
+
+					canvas.toBlob(function (blob) {
+						var formData = new FormData();
+						formData.append('image', blob);
+
+						$.ajax({
+							url: 'https://api.imgur.com/3/image',
+							type: 'POST',
+							headers: {
+								Authorization: 'Client-ID 735480ad9f92bbd'
+							},
+							data: formData,
+							cache: false,
+							contentType: false,
+							processData: false,
+							success: function (response) {
+								var imageUrl = response.data.link;
+								window.open(imageUrl, '_blank');
+								loadingGif.style.display = "none";
+								document.getElementById('urlB').value = '';
+
+								alert('Link: ' + imageUrl);
+							},
+							error: function () {
+								loadingGif.style.display = "none";
+								document.getElementById('urlB').value = '';
+
+								alert('Error al subir la imagen a Imgur');
+							}
+						});
+					}, file.type);
+				};
+				img.src = event.target.result;
+			};
+			reader.readAsDataURL(file);
+		})
+	</script>
+	<div class="template-download" onclick="downloadTemplate()">
+		<label for="urlC">Ver plantilla</label>
+	</div>
+	<script>
+		function downloadTemplate() {
+			var vehicleSelect = document.getElementById("model-select");
+			var currentVehicle = vehicleSelect.options[vehicleSelect.selectedIndex];
+			var templateLink = currentVehicle.dataset.template;
+
+			if (templateLink) {
+				window.open(templateLink, '_blank');
+			}
+		}
+	</script>
+
+	<div class="image-container">
+		<img id="myImage" src="https://i.imgur.com/alZmfWq.png" onclick="changeBackground()">
+	</div>
+	<script>
+		function changeBackground() {
+			var model_bg = document.querySelector("model-viewer");
+			var image = document.querySelector("#myImage");
+			var loadingGif = document.getElementById("gif-container");
+
+			if (model_bg.style.backgroundColor === "rgb(42, 49, 66)") {	//if dark
+				model_bg.style.backgroundColor = "#f5f7fa";
+				image.src = "https://i.imgur.com/alZmfWq.png";
+				loadingGif.style.filter = "invert(0%)";
+				localStorage.setItem('darkMode', 'desactivado');
+			} else {
+				model_bg.style.backgroundColor = "rgb(42, 49, 66)";
+				image.src = "https://i.imgur.com/iFWUlN3.png";
+				loadingGif.style.filter = "invert(100%)";
+				localStorage.setItem('darkMode', 'activado');
+			}
+		}
+
+		window.addEventListener('load', function () {
+			var model_bg = document.querySelector("model-viewer");
+			var image = document.querySelector("#myImage");
+			var loadingGif = document.getElementById("gif-container");
+
+			var status = localStorage.getItem('darkMode');
+			if (status == 'activado') {
+				model_bg.style.backgroundColor = "rgb(42, 49, 66)";
+				image.src = "https://i.imgur.com/iFWUlN3.png";
+				loadingGif.style.filter = "invert(100%)";
+				localStorage.setItem('darkMode', 'activado');
+			}
+		});
+	</script>
+
+	<model-viewer id="modelViewer" camera-controls src="assets/windsor.glb" camera-orbit="-40deg 70deg 0.59m"
+		shadow-intensity="0" environment-image="assets/wneutral.hdr" exposure="0.5"></model-viewer>
+
+	<script src="https://unpkg.com/@google/model-viewer@1.12.0/dist/model-viewer-umd.js"></script>
+	<script type="text/javascript">
+		// Change the model on screen
+		function changeModel() {
+			const select = document.getElementById("model-select");
+			const viewer = document.getElementById("modelViewer");
+			viewer.setAttribute("src", select.value);
+		}
+		// Al subir spray
+		document.getElementById("urlA").addEventListener("change", function () {
+			const file = this.files[0];
+			const viewer = document.getElementById("modelViewer");
+			if (!file) return;
+			const reader = new FileReader();
+			reader.addEventListener('load', async function () {
+				const texture = await viewer.createTexture(reader.result);
+				viewer.model.materials[0].pbrMetallicRoughness.baseColorTexture.setTexture(texture);
+			});
+			reader.readAsDataURL(file);
+			document.getElementById('urlA').value = '';
+		})
+	</script>
+	<script>
+		// Soporte para drag and drop
+		window.addEventListener('dragover', function (e) {
+			e.preventDefault();
+		});
+		window.addEventListener('drop', function (e) {
+			e.preventDefault();
+			const file = e.dataTransfer.files[0];
+			const viewer = document.getElementById("modelViewer");
+			if (!file) return;
+			const reader = new FileReader();
+			reader.addEventListener('load', async function () {
+				const texture = await viewer.createTexture(reader.result);
+				viewer.model.materials[0].pbrMetallicRoughness.baseColorTexture.setTexture(texture);
+			});
+			reader.readAsDataURL(file);
+		});
+		// Soporte para ctrl + v
+		document.onpaste = function (pasteEvent) {
+			var item = pasteEvent.clipboardData.items[0];
+			if (item.type.indexOf("image") === 0) {
+				const file = item.getAsFile();
+				const viewer = document.getElementById("modelViewer");
+				if (!file) return;
+				const reader = new FileReader();
+				reader.addEventListener('load', async function () {
+					const texture = await viewer.createTexture(reader.result);
+					viewer.model.materials[0].pbrMetallicRoughness.baseColorTexture.setTexture(texture);
+				});
+				reader.readAsDataURL(file);
+			}
+		}
+	</script>
+</body>
+
+</html>
